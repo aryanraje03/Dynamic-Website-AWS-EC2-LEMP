@@ -4,7 +4,7 @@
 
 I built this project to understand how a real dynamic website works end to end on the cloud. This is not just a static HTML page — it is a fully functional web application where a user fills a signup form, the data gets processed by PHP in the backend, and gets stored permanently in a MariaDB database. Everything runs live on an AWS EC2 instance.
 
-I did this project under the guidance of **Trupti Mane Ma'am**. This was one of the most hands-on and practical projects I have done so far in my cloud learning journey. Every step taught me something new — from setting up a Linux server on AWS to understanding how a web server, backend language, and database work together in a real environment.
+This was one of the most hands-on and practical projects I have done so far in my cloud learning journey. Every step taught me something new — from setting up a Linux server on AWS to understanding how a web server, backend language, and database work together in a real environment.
 
 ---
 
@@ -15,6 +15,8 @@ User (Browser)  -->  Nginx (Web Server)  -->  PHP + FPM (Backend)  -->  MariaDB 
 ```
 
 The user opens the signup form in a browser. Nginx receives the request and serves the HTML page. When the user submits the form, Nginx forwards the request to PHP-FPM which processes the form data and inserts it into the MariaDB database. The database stores all the submitted records permanently.
+
+I have also created a detailed architecture diagram using draw.io. You can view it in the `/diagram` folder of this repository.
 
 ---
 
@@ -159,6 +161,10 @@ Dynamic-Website-AWS-EC2-LEMP/
 |
 |-- backend/
 |   |-- submit.php          # PHP script to handle form and insert data to DB
+|
+|-- diagram/
+|   |-- architecture.drawio # draw.io architecture diagram
+|   |-- architecture.png    # Exported diagram image
 |
 |-- screenshots/
 |   |-- signup_form.png        # Live signup form on browser
