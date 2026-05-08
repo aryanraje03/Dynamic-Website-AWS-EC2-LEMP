@@ -1,23 +1,23 @@
-# 🚀 Dynamic Website Deployment on AWS EC2 (LEMP Stack)
+# Dynamic Website Deployment on AWS EC2 (LEMP Stack)
 
-## 📌 Project Overview
+##  Project Overview
 A fully functional dynamic website where users submit
 a signup form and data gets stored in MariaDB database
 — hosted live on AWS EC2.
 
-## 🛠️ Tech Stack
+##  Tech Stack
 | Technology | Purpose |
 |------------|---------|
 | AWS EC2 (Amazon Linux) | Cloud Server |
 | Nginx | Web Server |
-| PHP 8.5 + FPM | Backend Processing |
+| PHP + FPM | Backend Processing |
 | MariaDB 10.5 | Database |
 | php8.5-mysqlnd | PHP-MySQL Connector |
 
-## ⚙️ Installation Steps
+##  Installation Steps
 
 ### 1. Install LEMP Stack
-sudo yum install nginx mariadb105-server php8.5 php8.5-fpm -y
+sudo yum install nginx mariadb105-server php php-fpm -y
 
 ### 2. Enable Services
 sudo systemctl enable nginx mariadb php-fpm
@@ -41,12 +41,12 @@ CREATE TABLE users (
 );
 
 ### 5. Install PHP-MySQL Connector (Critical Step!)
-sudo yum install php8.5-mysqlnd.x86_64 -y
+sudo yum install php-mysqlnd.x86_64 -y
 
 ### 6. Restart All Services
 sudo systemctl restart nginx mariadb php-fpm
 
-## ✅ Result
+##  Result
 - Nginx: active (running)
 - MariaDB: active (running)
 - Form data successfully stored in database
