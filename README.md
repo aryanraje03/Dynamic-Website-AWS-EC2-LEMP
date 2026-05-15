@@ -72,7 +72,7 @@ Installed NGINX, MariaDB, PHP, and PHP-FPM on the server:
 sudo yum install nginx mariadb105-server php php-fpm -y
 ```
 
-> <img src="/Dynamic-Website-AWS-EC2-LEMP/screenshots/Packages installing successfully.PNG" alt="*Screenshot: Packages installing successfully*" width="500">
+> <img src="/Screenshots/Packages installing successfully.PNG" alt="*Screenshot: Packages installing successfully*" width="500">
 
 ---
 
@@ -91,7 +91,7 @@ Verified all services are running:
 sudo systemctl status nginx mariadb php-fpm
 ```
 
-> <img src="/Dynamic-Website-AWS-EC2-LEMP/screenshots/Packages installing successfully.PNG" alt="*Screenshot: All three services showing `active (running)` in green*" width="500"> 
+> <img src="/Screenshots/Packages installing successfully.PNG" alt="*Screenshot: All three services showing `active (running)` in green*" width="500"> 
 
 
 ---
@@ -115,7 +115,7 @@ Pasted the frontend HTML code for the **User Signup Form**.
 - Comment
 - Submit Button
 
-> <img src="/Dynamic-Website-AWS-EC2-LEMP/screenshots/Singup from.jpeg" alt="*Screenshot: signup.html file created with form code*" width="500">
+> <img src="/Screenshots/Singup from.jpeg" alt="*Screenshot: signup.html file created with form code*" width="500">
 
 ---
 
@@ -148,9 +148,6 @@ CREATE TABLE users (
 );
 ```
 
-
----
-
 ### Step 6 — Configure Backend (PHP)
 
 Created the PHP backend file in the NGINX web directory:
@@ -165,7 +162,7 @@ The PHP script handles:
 - Connecting to the MariaDB database
 - Inserting the submitted data into the `users` table
 
-> <img src="/Dynamic-Website-AWS-EC2-LEMP/screenshots/Database Submitted.jpeg" alt="*Screenshot: submit.php file created with backend code*" width="500">
+> <img src="/Screenshots/Database Submitted.jpeg" alt="*Screenshot: submit.php file created with backend code*" width="500">
 
 ---
 
@@ -183,9 +180,6 @@ Restarted all services to apply the changes:
 sudo systemctl restart nginx mariadb php-fpm
 ```
 
-
----
-
 ### Step 8 — Access the Application
 
 Opened the browser and navigated to the EC2 public IP:
@@ -195,7 +189,6 @@ http://your-ec2-public-ip/signup.html
 ```
 
 The **User Signup Form** loaded successfully in the browser.
-
 
 ---
 
