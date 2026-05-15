@@ -60,7 +60,7 @@ Connected to the instance using SSH:
 ssh -i "your-key.pem" ec2-user@your-ec2-public-ip
 ```
 
-> <img src="/Screenshots/SSH connection established.PNG" alt="📸 *Screenshot: EC2 instance running and SSH connection established" width="500">
+> <img src="/Screenshots/SSH connection established.PNG" alt="📸 *Screenshot: EC2 instance running and SSH connection established" width="1000">
 
 ---
 
@@ -72,7 +72,7 @@ Installed NGINX, MariaDB, PHP, and PHP-FPM on the server:
 sudo yum install nginx mariadb105-server php php-fpm -y
 ```
 
-> <img src="/Screenshots/Packages installing successfully.PNG" alt="*Screenshot: Packages installing successfully*" width="500">
+> <img src="/Screenshots/Packages installing successfully.PNG" alt="*Screenshot: Packages installing successfully*" width="1000">
 
 ---
 
@@ -91,7 +91,7 @@ Verified all services are running:
 sudo systemctl status nginx mariadb php-fpm
 ```
 
-> <img src="/Screenshots/Packages installing successfully.PNG" alt="*Screenshot: All three services showing `active (running)` in green*" width="500"> 
+> <img src="/Screenshots/Packages installing successfully.PNG" alt="*Screenshot: All three services showing `active (running)` in green*" width="1000"> 
 
 
 ---
@@ -115,7 +115,7 @@ Pasted the frontend HTML code for the **User Signup Form**.
 - Comment
 - Submit Button
 
-> <img src="/Screenshots/Singup from.jpeg" alt="*Screenshot: signup.html file created with form code*" width="500">
+> <img src="/Screenshots/Singup from.jpeg" alt="*Screenshot: signup.html file created with form code*" width="1000">
 
 ---
 
@@ -162,7 +162,7 @@ The PHP script handles:
 - Connecting to the MariaDB database
 - Inserting the submitted data into the `users` table
 
-> <img src="/Screenshots/Database Submitted.jpeg" alt="*Screenshot: submit.php file created with backend code*" width="500">
+> <img src="/Screenshots/Database Submitted.jpeg" alt="*Screenshot: submit.php file created with backend code*" width="1000">
 
 ---
 
