@@ -60,7 +60,7 @@ Connected to the instance using SSH:
 ssh -i "your-key.pem" ec2-user@your-ec2-public-ip
 ```
 
-> <img src="/Dynamic-Website-AWS-EC2-LEMP/Screenshots/SSH connection established.PNG" alt="📸 *Screenshot: EC2 instance running and SSH connection established" width="500">
+> <img src="/Screenshots/SSH connection established.PNG" alt="📸 *Screenshot: EC2 instance running and SSH connection established" width="500">
 
 ---
 
