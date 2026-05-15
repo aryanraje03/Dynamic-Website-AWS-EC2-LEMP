@@ -26,7 +26,7 @@ This project was completed as part of my **Cloud Learning Journey** to gain prac
 | AWS EC2 (Amazon Linux) | Cloud Virtual Server |
 | NGINX | Web Server |
 | PHP + PHP-FPM | Backend Processing |
-| MariaDB 10.5 | Relational Database |
+| MariaDB | Relational Database |
 | php-mysqlnd | PHP to MariaDB Connector |
 | HTML | Frontend Form |
 
@@ -60,7 +60,7 @@ Connected to the instance using SSH:
 ssh -i "your-key.pem" ec2-user@your-ec2-public-ip
 ```
 
-> <img src="/Dynamic-Website-AWS-EC2-LEMP/screenshots/SSH connection established.PNG" alt="📸 *Screenshot: EC2 instance running and SSH connection established" width="500">
+> <img src="/Dynamic-Website-AWS-EC2-LEMP/Screenshots/SSH connection established.PNG" alt="📸 *Screenshot: EC2 instance running and SSH connection established" width="500">
 
 ---
 
