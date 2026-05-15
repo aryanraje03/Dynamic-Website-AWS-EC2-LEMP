@@ -44,6 +44,8 @@ PHP-FPM Backend
 MariaDB Database
 ```
 
+> <img src="/Screenshots/Architecture Diagram.png" alt="📸 *Screenshot: EC2 instance running and SSH connection established" width="1000">
+
 ---
 
 ## Implementation Steps
