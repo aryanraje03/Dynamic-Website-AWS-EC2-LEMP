@@ -1,108 +1,141 @@
-# Dynamic Website Deployment on AWS EC2 using LEMP Stack
+# Dynamic Website Deployment on AWS EC2  
+## Using NGINX, PHP & MariaDB (LEMP Stack)
+
+---
 
 ## Project Overview
 
-I built this project to understand how a real dynamic website works end to end on the cloud. This is not just a static HTML page — it is a fully functional web application where a user fills a signup form, the data gets processed by PHP in the backend, and gets stored permanently in a MariaDB database. Everything runs live on an AWS EC2 instance.
+This project demonstrates the deployment of a **Dynamic Signup Form** web application on an Amazon EC2 instance using Amazon Linux.
 
-This was one of the most hands-on and practical projects I have done so far in my cloud learning journey. Every step taught me something new — from setting up a Linux server on AWS to understanding how a web server, backend language, and database work together in a real environment.
+The application allows users to submit their details through a web form, and the entered data is stored permanently in a **MariaDB** database using a **PHP** backend.
 
----
+This project was completed as part of my **Cloud Learning Journey** to gain practical, hands-on experience in:
 
-## Architecture
-
-```
-User (Browser)  -->  Nginx (Web Server)  -->  PHP + FPM (Backend)  -->  MariaDB (Database)
-```
-
-The user opens the signup form in a browser. Nginx receives the request and serves the HTML page. When the user submits the form, Nginx forwards the request to PHP-FPM which processes the form data and inserts it into the MariaDB database. The database stores all the submitted records permanently.
-
-I have also created a detailed architecture diagram using draw.io. You can view it in the `/diagram` folder of this repository.
+- Cloud server deployment on AWS
+- Linux server administration
+- Web server configuration with NGINX
+- Backend integration using PHP
+- Database setup and management with MariaDB
 
 ---
 
-## Tech Stack
+## Technologies Used
 
 | Technology | Purpose |
 |---|---|
-| AWS EC2 (Amazon Linux) | Cloud server to host the entire application |
-| Nginx | Web server to handle HTTP requests and serve files |
-| PHP + FPM | Backend scripting to process form data |
-| MariaDB | Relational database to store user submissions |
-| php-mysqlnd | Connector that allows PHP to communicate with MariaDB |
+| AWS EC2 (Amazon Linux) | Cloud Virtual Server |
+| NGINX | Web Server |
+| PHP + PHP-FPM | Backend Processing |
+| MariaDB 10.5 | Relational Database |
+| php-mysqlnd | PHP to MariaDB Connector |
+| HTML | Frontend Form |
 
 ---
 
-## What I Learned
+## Project Architecture
 
-Before this project, I only knew the theory of how websites work. After doing this project I now understand:
-
-- How to launch and configure a Linux server on AWS EC2
-- How Nginx works as a web server and how to configure it
-- How PHP-FPM processes requests from Nginx
-- How to create a database and table in MariaDB
-- Why the php-mysqlnd connector is critical — without it PHP cannot talk to the database at all
-- How to manage Linux services using systemctl
-- How all the layers of a web application connect together
+```
+User Browser
+     ↓
+NGINX Web Server
+     ↓
+PHP-FPM Backend
+     ↓
+MariaDB Database
+```
 
 ---
 
-## Installation Steps
+## Implementation Steps
+
+---
 
 ### Step 1 — Launch EC2 Instance
 
-Launch an Amazon Linux instance on AWS EC2. Configure the security group to allow inbound traffic on port 80 (HTTP) and port 22 (SSH). Connect to the instance using SSH.
+Created an Amazon Linux EC2 instance on AWS.  
+Configured the Security Group to allow inbound traffic on **Port 22 (SSH)** and **Port 80 (HTTP)**.  
+Connected to the instance using SSH:
 
 ```bash
-ssh -i your-key.pem ec2-user@your-ec2-public-ip
+ssh -i "your-key.pem" ec2-user@your-ec2-public-ip
 ```
 
-### Step 2 — Install LEMP Stack
+> <img src="/Dynamic-Website-AWS-EC2-LEMP/screenshots/SSH connection established.PNG" alt="📸 *Screenshot: EC2 instance running and SSH connection established" width="500">
 
-Install Nginx, MariaDB, PHP, and PHP-FPM on the server.
+---
+
+### Step 2 — Install Required Packages
+
+Installed NGINX, MariaDB, PHP, and PHP-FPM on the server:
 
 ```bash
 sudo yum install nginx mariadb105-server php php-fpm -y
 ```
 
-### Step 3 — Enable and Start All Services
+> <img src="/Dynamic-Website-AWS-EC2-LEMP/screenshots/Packages installing successfully.PNG" alt="*Screenshot: Packages installing successfully*" width="500">
 
-Enable the services so they start automatically on reboot, then start them.
+---
+
+### Step 3 — Start and Enable Services
+
+Started the services and enabled them to auto-start on reboot:
 
 ```bash
 sudo systemctl enable nginx mariadb php-fpm
 sudo systemctl start nginx mariadb php-fpm
 ```
 
-### Step 4 — Verify Services Are Running
-
-Check that all three services are active and running correctly.
+Verified all services are running:
 
 ```bash
 sudo systemctl status nginx mariadb php-fpm
 ```
 
-Both Nginx and MariaDB should show `active (running)` in green.
+> <img src="/Dynamic-Website-AWS-EC2-LEMP/screenshots/Packages installing successfully.PNG" alt="*Screenshot: All three services showing `active (running)` in green*" width="500"> 
 
-### Step 5 — Deploy the Website Files
 
-Navigate to the Nginx HTML directory and place your project files there.
+---
+
+### Step 4 — Create Frontend (HTML Form)
+
+Navigated to the NGINX web directory and created the signup form:
 
 ```bash
-cd /var/www/share/nginx/html
+cd /usr/share/nginx/html/
+sudo vim signup.html
 ```
 
-Place `signup.html` and `submit.php` in this folder. These are the frontend form and the backend PHP handler respectively.
+Pasted the frontend HTML code for the **User Signup Form**.
 
-### Step 6 — Setup the MariaDB Database
+**Form Fields:**
+- Name
+- Email
+- Website
+- Gender
+- Comment
+- Submit Button
 
-Login to MariaDB and create the database and table.
+> <img src="/Dynamic-Website-AWS-EC2-LEMP/screenshots/Singup from.jpeg" alt="*Screenshot: signup.html file created with form code*" width="500">
+
+---
+
+### Step 5 — Configure Database
+
+Logged into MariaDB and secured the root account:
 
 ```bash
-sudo mysql -u root -p
+sudo mysql
 ```
 
 ```sql
+ALTER USER 'root'@'localhost' IDENTIFIED BY 'root';
+```
+
+Created the database and table:
+
+```sql
 CREATE DATABASE FCT;
+
 USE FCT;
 
 CREATE TABLE users (
@@ -115,95 +148,100 @@ CREATE TABLE users (
 );
 ```
 
-### Step 7 — Install the PHP-MySQL Connector (Most Important Step)
 
-This is the most critical step. Without this connector, PHP cannot communicate with MariaDB at all. I learned this the hard way.
+---
+
+### Step 6 — Configure Backend (PHP)
+
+Created the PHP backend file in the NGINX web directory:
+
+```bash
+cd /usr/share/nginx/html/
+sudo vim submit.php
+```
+
+The PHP script handles:
+- Receiving form data submitted by the user
+- Connecting to the MariaDB database
+- Inserting the submitted data into the `users` table
+
+> <img src="/Dynamic-Website-AWS-EC2-LEMP/screenshots/Database Submitted.jpeg" alt="*Screenshot: submit.php file created with backend code*" width="500">
+
+---
+
+### Step 7 — Install PHP MySQL Connector ⚠️ (Critical Step)
+
+This is the **most important step**. Without this connector, PHP cannot communicate with MariaDB at all.
 
 ```bash
 sudo yum install php-mysqlnd.x86_64 -y
 ```
 
-### Step 8 — Restart All Services
-
-After all configuration is done, restart all services to apply the changes.
+Restarted all services to apply the changes:
 
 ```bash
 sudo systemctl restart nginx mariadb php-fpm
 ```
 
-### Step 9 — Test the Application
 
-Open your browser and go to:
+---
+
+### Step 8 — Access the Application
+
+Opened the browser and navigated to the EC2 public IP:
 
 ```
 http://your-ec2-public-ip/signup.html
 ```
 
-Fill the form and submit it. Then verify the data was stored in the database:
+The **User Signup Form** loaded successfully in the browser.
+
+
+---
+
+### Step 9 — Submit Form and Verify Data
+
+Filled the form and submitted it.  
+Then verified the data was stored in the database:
 
 ```bash
 sudo mysql -u root -p
+```
+
+```sql
 USE FCT;
 SELECT * FROM users;
 ```
 
-You should see the submitted record in the table.
+The submitted record appeared in the database table confirming end-to-end functionality.
 
 ---
 
-## Project Structure
+## ✅ Project Output
 
-```
-Dynamic-Website-AWS-EC2-LEMP/
-|
-|-- frontend/
-|   |-- signup.html         # User signup form
-|
-|-- backend/
-|   |-- submit.php          # PHP script to handle form and insert data to DB
-|
-|-- diagram/
-|   |-- architecture.drawio # draw.io architecture diagram
-|   |-- architecture.png    # Exported diagram image
-|
-|-- screenshots/
-|   |-- signup_form.png        # Live signup form on browser
-|   |-- form_submitted.png     # Success page after form submission
-|   |-- database_record.png    # MariaDB showing stored data
-|   |-- server_status.png      # Nginx and MariaDB active status
-|
-|-- README.md
-```
+- User Signup Form deployed successfully on AWS EC2
+- Form accessible via EC2 Public IP in the browser
+- Form data stored permanently in MariaDB database
+- All services (NGINX, PHP-FPM, MariaDB) running successfully
+- Full cloud deployment completed end-to-end
 
 ---
 
-## Screenshots
+## 🎯 Learning Outcomes
 
-### Signup Form
-The HTML form running live on the EC2 server accessed via the public IP.
+Through this project I learned:
 
-### Form Submitted Successfully
-After filling and submitting the form, the PHP script processes the data and shows a success message with the submitted details.
-
-### Data Stored in MariaDB
-After submission, the record is visible in the MariaDB database using `SELECT * FROM users` query.
-
-### Server Status
-Both Nginx and MariaDB services showing `active (running)` status confirming the deployment is working.
-
----
-
-## Summary
-
-This project gave me real hands-on experience with cloud infrastructure and full stack web deployment. I started from scratch — launching a server on AWS, installing and configuring all the required services, writing the backend PHP code, setting up the database, and finally testing the complete flow end to end.
-
-The most important thing I understood from this project is that deploying a website is not just about writing HTML or PHP. It is about understanding how all the components — the cloud server, web server, backend language, database, and their connectors — work together as one system.
-
-I am happy that I was able to complete this project successfully and I am looking forward to building more complex projects on top of this foundation.
+- How to launch and configure a Linux server on AWS EC2
+- How NGINX works as a web server and how to configure it
+- How PHP-FPM processes requests forwarded by NGINX
+- How to create a database and table in MariaDB
+- Why the `php-mysqlnd` connector is critical — PHP cannot talk to the database without it
+- How to manage Linux services using `systemctl`
+- How all the layers of a web application connect together as one system
 
 ---
 
 ## Author
 
-**Aryanraje Dhokale**
+**Aryanraje Dhokale**  
 Cloud and DevOps Learner
